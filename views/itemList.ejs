@@ -7,6 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    Item List
+    <h1>Items</h1>
+    <ul>
+        <% if (listItems.length) { %>
+            <% listItems.forEach((item) => { %>
+                <li>
+                    <%= item.name %> <br> <%= item.description %> <br> Price $<%= item.price.toFixed(2) %> 
+                    <% if(item.inStock){ %>
+                        | In Stock: <%= item.inStock%>
+                    <% } %>
+                    <br> Category: <%= item.category.name %>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li>No items.</li>
+        <% } %>
+    </ul>
 </body>
 </html>

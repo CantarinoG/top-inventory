@@ -1,7 +1,17 @@
 const Item = require("../models/item.js");
 
 exports.itemList = (req, res, next) => {
-    res.send("Item list");
+    Item.find({})
+    .sort({name: 1})
+    .populate("category")
+    .exec(function (err, listItems) {
+        if (err) {
+            next(err);
+        }
+        res.render("itemList", {
+            listItems: listItems
+        });
+    });
 }
 
 exports.itemDetail = (req, res, next) => {
