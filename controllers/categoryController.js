@@ -2,6 +2,7 @@ const Category = require("../models/category.js");
 const Item = require("../models/item.js");
 const async = require("async");
 const mongoose = require("mongoose");
+const { body, validationResult } = require("express-validator");
 
 exports.categoryList = (req, res, next) => {
     Category.find({})
@@ -44,7 +45,7 @@ exports.categoryDetail = (req, res, next) => {
 }
 
 exports.categoryCreateGet = (req, res, next) => {
-    res.send("Category create GET");
+    res.render("categoryCreate");
 }
 
 exports.categoryCreatePost = (req, res, next) => {
