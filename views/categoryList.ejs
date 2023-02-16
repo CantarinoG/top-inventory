@@ -7,6 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    Category List
+    <h1>Categories</h1>
+    <ul>
+        <% if (listCategories.length) { %>
+            <% listCategories.forEach((category) => { %>
+                <li>
+                    <%= category.name %> <br>  <%= category.description %>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li>No items.</li>
+        <% } %>
+    </ul>
 </body>
 </html>
