@@ -4,7 +4,30 @@ var router = express.Router();
 const categoryController = require('../controllers/categoryController');
 const itemController = require('../controllers/itemController');
 
-router.get("/", (req, res, next) => {res.send("Home page");})
+const Category = require('../models/category');
+const Item = require('../models/item');
+
+const async = require('async');
+
+router.get("/", (req, res, next) => {
+  async.parallel(
+    {
+      categoryCount(callback){
+        Category.countDocuments({}, callback);
+      },
+      itemCount(callback){
+        Item.countDocuments({}, callback);
+      }
+    },
+    (err, results) => {
+      res.render("index", {
+        title: "Flow Shop",
+        error: err,
+        data: results
+      });
+    }
+  );
+})
 
 router.get("/category/create", categoryController.categoryCreateGet);
 router.post("/category/create", categoryController.categoryCreatePost);
