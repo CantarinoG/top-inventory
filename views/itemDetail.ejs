@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    Item Detail
+    <h1><%= item.name %></h1>
+    <%= item.name %> <br> <%= item.description %> <br> Price $<%= item.price.toFixed(2) %> 
+    <% if(item.inStock){ %>
+        | In Stock: <%= item.inStock%>
+    <% } %>
+    <br> Category: <%= item.category.name %>
 </body>
 </html>

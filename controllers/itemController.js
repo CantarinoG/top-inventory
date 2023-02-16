@@ -6,7 +6,7 @@ exports.itemList = (req, res, next) => {
     .populate("category")
     .exec(function (err, listItems) {
         if (err) {
-            next(err);
+            return next(err);
         }
         res.render("itemList", {
             listItems: listItems
@@ -15,7 +15,21 @@ exports.itemList = (req, res, next) => {
 }
 
 exports.itemDetail = (req, res, next) => {
-    res.send(`Item detail: ${req.params.id}`);
+    Item.findById(req.params.id)
+    .populate("category")
+    .exec(function (err, item) {
+        if (err) {
+            return next(err);
+        }
+        if (item == null) {
+            const err = new Error("Item not found");
+            err.status = 404;
+            return next(err);
+        }
+        res.render("itemDetail", {
+            item: item
+        });
+    });
 }
 
 exports.itemCreateGet = (req, res, next) => {
