@@ -117,7 +117,22 @@ exports.itemDeleteGet = (req, res, next) => {
 }
 
 exports.itemDeletePost = (req, res, next) => {
-    res.send("Item delete POST");
+    Item.findById(req.params.id).exec(
+        function(err, item) {
+            if(err) {
+                return next(err);
+            }
+            if(item == null){
+                res.redirect("/items");
+            }
+            Item.findByIdAndRemove(req.params.id, (err) => {
+                if(err) {
+                    return next(err);
+                }
+                res.redirect("/items");
+            })
+        }
+    );
 }
 
 exports.itemUpdateGet = (req, res, next) => {
