@@ -7,6 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    Item Create
+    <h1>Create new item:</h1>
+    <form action="" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name"/>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description"/>
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price"/>
+        <label for="inStock">In Stock:</label>
+        <input type="number" name="inStock" id="inStock"/>
+        <label for="category">category:</label>
+        <select id="category" type="select" name="category">
+            <% if ((typeof listCategories != "undefined") && listCategories.length) { %>
+                <% listCategories.forEach((category) => { %>
+                    <option value="<%= category._id %>"><%= category.name %></option>
+                <% }) %>
+            <% } %>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

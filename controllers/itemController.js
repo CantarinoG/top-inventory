@@ -1,4 +1,6 @@
 const Item = require("../models/item.js");
+const Category = require("../models/category.js");
+const { body, validationResult } = require("express-validator");
 
 exports.itemList = (req, res, next) => {
     Item.find({})
@@ -33,7 +35,16 @@ exports.itemDetail = (req, res, next) => {
 }
 
 exports.itemCreateGet = (req, res, next) => {
-    res.send("Item create GET");
+    Category.find({}).sort({name: 1}).exec(
+        function (err, listCategories) {
+            if (err) {
+                return next(err);
+            }
+            res.render("itemCreate", {
+                listCategories: listCategories
+            });
+        }
+    );
 }
 
 exports.itemCreatePost = (req, res, next) => {
