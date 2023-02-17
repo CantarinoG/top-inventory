@@ -48,9 +48,30 @@ exports.categoryCreateGet = (req, res, next) => {
     res.render("categoryCreate");
 }
 
-exports.categoryCreatePost = (req, res, next) => {
-    res.send("Category create POST");
-}
+exports.categoryCreatePost = [
+    body("name", "Name is required.").trim().isLength({min: 1}).escape(),
+    body("description", "Description is required.").trim().isLength({min: 1}).escape(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        const category = new Category({
+            name: req.body.name,
+            description: req.body.description
+        });
+        if(!errors.isEmpty()){
+            res.render("categoryCreate", {
+                category: category,
+                errors: errors.array()
+            });
+            return;
+        }
+        category.save((err) => {
+            if(err) {
+                return next(err);
+            }
+            res.redirect(category.url);
+        });
+    }
+]
 
 exports.categoryDeleteGet = (req, res, next) => {
     res.send("Category delete GET");
