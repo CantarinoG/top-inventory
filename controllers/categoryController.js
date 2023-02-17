@@ -74,7 +74,28 @@ exports.categoryCreatePost = [
 ]
 
 exports.categoryDeleteGet = (req, res, next) => {
-    res.send("Category delete GET");
+    async.parallel(
+        {
+            category(callback){
+                Category.findById(req.params.id).exec(callback);
+            },
+            items(callback){
+                    Item.find({category: req.params.id}).exec(callback);
+            }
+        },
+        (err, results) => {
+            if(err) {
+                return next(err);
+            }
+            if(results.category == null) {
+                res.redirect("/categories");
+            }
+            res.render("categoryDelete", {
+                category: results.category,
+                items: results.items
+            });
+        }
+    );
 }
 
 exports.categoryDeletePost = (req, res, next) => {
