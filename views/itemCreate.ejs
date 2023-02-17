@@ -8,24 +8,63 @@
 </head>
 <body>
     <h1>Create new item:</h1>
-    <form action="" method="post">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name"/>
-        <label for="description">Description:</label>
-        <input type="text" name="description" id="description"/>
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price"/>
-        <label for="inStock">In Stock:</label>
-        <input type="number" name="inStock" id="inStock"/>
-        <label for="category">category:</label>
-        <select id="category" type="select" name="category">
-            <% if ((typeof listCategories != "undefined") && listCategories.length) { %>
-                <% listCategories.forEach((category) => { %>
-                    <option value="<%= category._id %>"><%= category.name %></option>
+    <% if(typeof item == "undefined"){ %>
+        <form action="" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name"/>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description"/>
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price"/>
+            <label for="inStock">In Stock:</label>
+            <input type="number" name="inStock" id="inStock"/>
+            <label for="category">category:</label>
+            <select id="category" type="select" name="category">
+                <% if ((typeof listCategories != "undefined") && listCategories.length) { %>
+                    <% listCategories.forEach((category) => { %>
+                        <option value="<%= category._id %>"><%= category.name %></option>
+                    <% }) %>
+                <% } %>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    <%} else {%>
+        <form action="" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<%= item.name %>"/>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" value="<%= item.description %>"/>
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" value="<%= item.price %>"/>
+            <label for="inStock">In Stock:</label>
+            <input type="number" name="inStock" id="inStock" value="<%= item.inStock %>"/>
+            <label for="category">category:</label>
+            <select id="category" type="select" name="category">
+                <% if ((typeof listCategories != "undefined") && listCategories.length) { %>
+                    <% listCategories.forEach((category) => { %>
+                        <option value="<%= category._id %>"
+                            <% if(item.category.toString() == category._id.toString()) {%>
+                                selected="selected"
+                            <% } %>
+                            ><%= category.name %></option>
+                    <% }) %>
+                <% } %>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    <% } %>
+
+    <% if(typeof errors != "undefined"){ %>
+        <ul>
+            <% if (errors.length) { %>
+                <% errors.forEach((error) => { %>
+                    <li>
+                       <%= error.msg %>
+                    </li>
                 <% }) %>
             <% } %>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+        </ul>
+    <% } %>
+
 </body>
 </html>
