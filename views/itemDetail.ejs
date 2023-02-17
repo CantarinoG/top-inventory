@@ -13,5 +13,11 @@
         | In Stock: <%= item.inStock%>
     <% } %>
     <br> Category: <%= item.category.name %>
+
+    <p>
+        <a href="<%= item.url%>/update">Update</a>
+        <a href="<%= item.url%>/delete">Delete</a>
+    </p>
+
 </body>
 </html>

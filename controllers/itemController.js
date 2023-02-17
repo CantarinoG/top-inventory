@@ -101,7 +101,19 @@ exports.itemCreatePost = [
 ];
 
 exports.itemDeleteGet = (req, res, next) => {
-    res.send("Item delete GET");
+    Item.findById(req.params.id).exec(
+        function(err, item) {
+            if(err) {
+                return next(err);
+            }
+            if(item == null){
+                res.redirect("/items");
+            }
+            res.render("itemDelete", {
+                item: item
+            });
+        }
+    );
 }
 
 exports.itemDeletePost = (req, res, next) => {

@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    Item Delete
+    <h1><%= item.name %></h1>
+    <%= item.name %> <br> <%= item.description %> <br> Price $<%= item.price.toFixed(2) %> 
+    <% if(item.inStock){ %>
+        | In Stock: <%= item.inStock%>
+    <% } %>
+    <br> Category: <%= item.category.name %>
+    <form action="" method="POST">
+        <p>Do you really want to delete this item?</p>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
