@@ -99,7 +99,35 @@ exports.categoryDeleteGet = (req, res, next) => {
 }
 
 exports.categoryDeletePost = (req, res, next) => {
-    res.send("Category delete POST");
+    async.parallel(
+        {
+            category(callback){
+                Category.findById(req.params.id).exec(callback);
+            },
+            items(callback){
+                    Item.find({category: req.params.id}).exec(callback);
+            }
+        },
+        (err, results) => {
+            if(err) {
+                return next(err);
+            }
+            if(results.items.length > 0) {
+                res.render("categoryDelete", {
+                    category: results.category,
+                    items: results.items,
+                    alert: "You must remove all items in the category before deleting."
+                });
+                return;
+            }
+            Category.findByIdAndRemove(req.params.id, (err) => {
+                if(err) {
+                    return next(err);
+                }
+                res.redirect("/categories");
+            });
+        }
+    );
 }
 
 exports.categoryUpdateGet = (req, res, next) => {
