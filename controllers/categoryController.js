@@ -131,9 +131,39 @@ exports.categoryDeletePost = (req, res, next) => {
 }
 
 exports.categoryUpdateGet = (req, res, next) => {
-    res.send("Category update GET");
+    Category.findById(req.params.id).exec(function(err, category) {
+        if(err) return next(err);
+        if(category == null) {
+            const error = new Error("Category not found");
+            error.status = 404;
+            return next(error);
+        }
+        res.render("categoryCreate", {
+            category: category
+        })
+    });
 }
 
-exports.categoryUpdatePost = (req, res, next) => {
-    res.send("Category update POST");
-}
+exports.categoryUpdatePost = [
+    body("name", "Name is required.").trim().isLength({min: 1}).escape(),
+    body("description", "Description is required.").trim().isLength({min: 1}).escape(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        const category = new Category({
+            name: req.body.name,
+            description: req.body.description,
+            _id: req.params.id
+        });
+        if(!errors.isEmpty()){
+            res.render("categoryCreate", {
+                category: category,
+                errors: errors.array()
+            });
+            return;
+        }
+        Category.findByIdAndUpdate(req.params.id, category, {}, (err, updatedCategory) => {
+            if(err) return next(err);
+            res.redirect(updatedCategory.url);
+        });
+    }
+]
