@@ -159,6 +159,53 @@ exports.itemUpdateGet = (req, res, next) => {
     });
 }
 
-exports.itemUpdatePost = (req, res, next) => {
-    res.send("Item update POST");
-}
+exports.itemUpdatePost = [
+    body("name", "Name must not be empty.")
+    .trim()
+    .isLength({min: 1})
+    .escape(),
+    body("description", "Description must not be empty.")
+    .trim()
+    .isLength({min: 1})
+    .escape(),
+    body("price", "Price must be a number.")
+    .isNumeric().escape(),
+    body("price", "Price must not be empty.")
+    .notEmpty().escape(),
+    body("inStock", "In Stock must not be empty.")
+    .notEmpty().escape(),
+    body("inStock", "In Stock must be a number.")
+    .isNumeric().escape(),
+    body("category", "A category must be selected.")
+    .notEmpty().escape(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        const item = new Item({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            price: req.body.price,
+            inStock: req.body.inStock,
+            _id: req.params.id
+        });
+        if (!errors.isEmpty()) {
+            Category.find({}).sort({name: 1}).exec(
+                function (err, listCategories) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.render("itemCreate", {
+                        listCategories: listCategories,
+                        item: item,
+                        errors: errors.array()
+                    });
+                }
+            );
+        return;
+        }
+        Item.findByIdAndUpdate(req.params.id, item, {}, (err, updatedItem) => {
+            if(err) return next(err);
+            res.redirect(updatedItem.url);
+        })
+    }
+];
