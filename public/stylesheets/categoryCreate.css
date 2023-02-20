@@ -1,0 +1,50 @@
+body {
+    padding: calc(60px + 10%) 10% 10% 10%;
+    color: black;
+    font-family: var(--vato);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    letter-spacing: 4px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    width: calc(240px + 1vw);
+    gap: 10px;
+}
+
+textarea {
+    height: 200px;
+    font-family: var(--vato);
+}
+
+button {
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: var(--vato);
+    margin: 0 4px;
+    opacity: .8;
+    padding: 12px 24px;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+ul {
+    color: red;
+    list-style-type: none;
+}

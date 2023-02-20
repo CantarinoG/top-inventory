@@ -51,6 +51,21 @@ ul li:hover {
     -webkit-box-orient: vertical; 
 }
 
+.new {
+    background-color: black;
+    border: none;
+    color: white !important;
+    cursor: pointer;
+    font-family: var(--vato);
+    margin: 0 4px;
+    opacity: .8;
+    padding: 12px 24px;
+}
+
+.new:hover {
+    opacity: 1;
+}
+
 a:link, a:visited, a:active {
     text-decoration: none;
     color: black;

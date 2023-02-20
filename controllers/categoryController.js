@@ -45,7 +45,9 @@ exports.categoryDetail = (req, res, next) => {
 }
 
 exports.categoryCreateGet = (req, res, next) => {
-    res.render("categoryCreate");
+    res.render("categoryCreate", {
+        title: "Create Category"
+    });
 }
 
 exports.categoryCreatePost = [
@@ -59,6 +61,7 @@ exports.categoryCreatePost = [
         });
         if(!errors.isEmpty()){
             res.render("categoryCreate", {
+                title: "Create Category",
                 category: category,
                 errors: errors.array()
             });
@@ -139,6 +142,7 @@ exports.categoryUpdateGet = (req, res, next) => {
             return next(error);
         }
         res.render("categoryCreate", {
+            title: "Update Category",
             category: category
         })
     });
@@ -156,6 +160,7 @@ exports.categoryUpdatePost = [
         });
         if(!errors.isEmpty()){
             res.render("categoryCreate", {
+                title: "Update Category",
                 category: category,
                 errors: errors.array()
             });
