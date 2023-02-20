@@ -1,27 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  <head>
+    <title>Items | Flow Shop</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta
+      name="description"
+      content=" An inventory management app for a fictional store called FlowShop."
+    />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel='stylesheet' href='/stylesheets/itemList.css' />
+
+  </head>
+
 <body>
-    <h1>Items</h1>
-    <ul>
-        <% if (listItems.length) { %>
-            <% listItems.forEach((item) => { %>
-                <li>
-                    <%= item.name %> <br> <%= item.description %> <br> Price $<%= item.price.toFixed(2) %> 
-                    <% if(item.inStock){ %>
-                        | In Stock: <%= item.inStock%>
-                    <% } %>
-                    <br> Category: <%= item.category.name %>
-                </li>
-            <% }) %>
-        <% } else { %>
-            <li>No items.</li>
-        <% } %>
-    </ul>
+
+    <header>
+        <nav class="logo">
+          <a href="../">FLOW SHOP</a>
+        </nav>
+        <nav>
+                <a href="../categories">CATEGORIES</a>
+                <a href="../items">ITEMS</a>
+        </nav>
+    </header>
+
+    <section class="items">
+
+        <h2>ALL ITEMS:</h2>
+        <div class="card-container">
+
+            <% if (listItems.length) { %>
+                <% listItems.forEach((item) => { %>
+                    <div class="card">
+                        <% if (typeof item.image == "undefined") {%>
+                            <img class="card-img-top" src="/images/noPic.png" alt="Card image">
+                        <%} else {%>
+                            <img class="card-img-top" src="<%= item.image %>" alt="Card image">
+                        <%}%>
+
+                        <div class="card-body">
+                        <h4 class="card-title" title="<%= item.name %>"><%= item.name %></h4>
+                        <p class="card-text">$<%= item.price.toFixed(2) %></p>
+                        <a href="<%= item.url %>" class="see">See Item</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p> No Items. </p>
+            <% } %>
+
+        </div>
+    </section>
 </body>
 </html>
