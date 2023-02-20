@@ -1,0 +1,94 @@
+.about {
+    padding: calc(60px + 10%) 10% 10% 10%;
+    background-color: black;
+    color: white;
+    font-family: var(--vato);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.about h1 {
+    letter-spacing: 4px;
+    font-size: calc(2em + 0.5vw);
+}
+
+.about p {
+    font-size: calc(1em + 0.5vw);
+}
+
+.items {
+    padding: 10%;
+    background-color: white;
+    color: black;
+    font-family: var(--vato);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.items h2 {
+    letter-spacing: 4px;
+    font-size: calc(2em + 0.5vw);
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 200px;
+}
+
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    font-size: 1em;
+}
+
+.see {
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: var(--vato);
+    margin: 0 4px;
+    opacity: .8;
+    padding: 12px 24px;
+}
+
+.see:hover {
+    opacity: 1;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+    color: white;
+}
+
+.change-cat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
