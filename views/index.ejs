@@ -1,20 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Flow Shop</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta
+      name="description"
+      content=" An inventory management app for a fictional store called FlowShop."
+    />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel='stylesheet' href='/stylesheets/home.css' />
+
   </head>
   <body>
-    <h1><%= title %></h1>
-    <% if (error) { %>
-      <p>Error getting dynamic content</p>
-    <% } else {%>
-      <p>Items:</p>
-      <ul>
-        <li>Number of categories: <%= data.categoryCount %></li>
-        <li>Number of items: <%= data.itemCount %></li>
-      </ul>
-    <% } %>
+
+    <header>
+      <nav class="logo">
+        <a href="./">FLOW SHOP</a>
+      </nav>
+      <nav>
+              <a href="./categories">CATEGORIES</a>
+              <a href="./items">ITEMS</a>
+      </nav>
+  </header>
+
+  <div id="carousel" class="carousel slide main" data-bs-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item main active">
+        <div class="carousel-content">
+          <span class="title">CATEGORIES</span>
+          <span class="sub"><%= data.categoryCount %> categories</span>
+          <span class="desc">Browse our product's categories. We have clothing, digital albums and much more.</span>
+          <a class="browse-btn" href="./categories">BROWSE</a>
+        </div>
+      </div>
+      <div class="carousel-item main">
+        <div class="carousel-content">
+          <span class="title">ITEMS</span>
+          <span class="sub"><%= data.itemCount %> items</span>
+          <span class="desc">Browse our products. We have many digital albums, t-shirts, beanies and much more.</span>
+          <a class="browse-btn" href="./items">BROWSE</a>
+          </div>
+      </div>
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
 
   </body>
 </html>

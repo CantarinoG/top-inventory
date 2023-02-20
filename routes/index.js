@@ -21,7 +21,6 @@ router.get("/", (req, res, next) => {
     },
     (err, results) => {
       res.render("index", {
-        title: "Flow Shop",
         error: err,
         data: results
       });
