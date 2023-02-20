@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  <head>
+    <title>Categories | Flow Shop</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta
+      name="description"
+      content=" An inventory management app for a fictional store called FlowShop."
+    />
+
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel='stylesheet' href='/stylesheets/categoryList.css' />
+
+  </head>
+
 <body>
-    <h1>Categories</h1>
+
+    <header>
+        <nav class="logo">
+          <a href="./">FLOW SHOP</a>
+        </nav>
+        <nav>
+                <a href="./categories">CATEGORIES</a>
+                <a href="./items">ITEMS</a>
+        </nav>
+    </header>
+
+    <h1>CATEGORIES</h1>
+
     <ul>
         <% if (listCategories.length) { %>
             <% listCategories.forEach((category) => { %>
                 <li>
-                    <%= category.name %> <br>  <%= category.description %>
+                    <a href="<%= category.url %>">
+                        <span class="cat-name"><%= category.name %></span>
+                        <span class="cat-desc"><%= category.description %></span>
+                    </a>
                 </li>
             <% }) %>
         <% } else { %>
             <li>No items.</li>
         <% } %>
     </ul>
+
 </body>
 </html>
