@@ -123,24 +123,41 @@ exports.itemDeleteGet = (req, res, next) => {
     );
 }
 
-exports.itemDeletePost = (req, res, next) => {
-    Item.findById(req.params.id).exec(
-        function(err, item) {
-            if(err) {
-                return next(err);
-            }
-            if(item == null){
-                res.redirect("/items");
-            }
-            Item.findByIdAndRemove(req.params.id, (err) => {
+exports.itemDeletePost = [
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
+    (req, res, next) => {
+        Item.findById(req.params.id).exec(
+            function(err, item) {
+                const errors = validationResult(req);
                 if(err) {
                     return next(err);
                 }
-                res.redirect("/items");
-            })
-        }
-    );
-}
+                if(item == null){
+                    res.redirect("/items");
+                }
+                if (!errors.isEmpty()) {
+                    res.render("itemDelete", {
+                        item: item,
+                        errors: errors.array()
+                    });
+                    return;
+                }
+                Item.findByIdAndRemove(req.params.id, (err) => {
+                    if(err) {
+                        return next(err);
+                    }
+                    res.redirect("/items");
+                })
+            }
+        );
+    }
+];
 
 exports.itemUpdateGet = (req, res, next) => {
     async.parallel({

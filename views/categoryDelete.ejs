@@ -39,6 +39,16 @@
         <p class="alert"><%= alert %></p>
     <% } %>
 
+    <% if(typeof errors != "undefined"){ %>
+            <% if (errors.length) { %>
+                <% errors.forEach((error) => { %>
+                    <p class="alert">
+                       <%= error.msg %>
+                    </p>
+                <% }) %>
+            <% } %>
+    <% } %>
+
     <h2>IN THIS CATEGORY: </h2>
 
     <div class="card-container">
@@ -67,6 +77,8 @@
 
     <form action="" method="POST">
         <p>Do you really want to delete this category?</p>
+        <label for="pass">Admin Password(Required for changes):</label>
+        <input type="text" name="pass" id="pass"/>
         <button type="submit">DELETE</button>
     </form>
 

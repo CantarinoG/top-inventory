@@ -108,37 +108,56 @@ exports.categoryDeleteGet = (req, res, next) => {
     );
 }
 
-exports.categoryDeletePost = (req, res, next) => {
-    async.parallel(
-        {
-            category(callback){
-                Category.findById(req.params.id).exec(callback);
+exports.categoryDeletePost = [
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
+    (req, res, next) => {
+        async.parallel(
+            {
+                category(callback){
+                    Category.findById(req.params.id).exec(callback);
+                },
+                items(callback){
+                        Item.find({category: req.params.id}).exec(callback);
+                }
             },
-            items(callback){
-                    Item.find({category: req.params.id}).exec(callback);
-            }
-        },
-        (err, results) => {
-            if(err) {
-                return next(err);
-            }
-            if(results.items.length > 0) {
-                res.render("categoryDelete", {
-                    category: results.category,
-                    items: results.items,
-                    alert: "You must remove all items in the category before deleting."
-                });
-                return;
-            }
-            Category.findByIdAndRemove(req.params.id, (err) => {
+            (err, results) => {
+                const errors = validationResult(req);
                 if(err) {
                     return next(err);
                 }
-                res.redirect("/categories");
-            });
-        }
-    );
-}
+                if(results.items.length > 0 && !errors.isEmpty()) {
+                    res.render("categoryDelete", {
+                        category: results.category,
+                        items: results.items,
+                        alert: "You must remove all items in the category before deleting.",
+                        errors: errors.array()
+                    });
+                    return;
+                }
+                else if (!errors.isEmpty()) {
+                    res.render("categoryDelete", {
+                        category: results.category,
+                        items: results.items,
+                        errors: errors.array()
+                    });
+                    return;
+                }
+                Category.findByIdAndRemove(req.params.id, (err) => {
+                    if(err) {
+                        return next(err);
+                    }
+                    res.redirect("/categories");
+                });
+            }
+        );
+    }
+];
 
 exports.categoryUpdateGet = (req, res, next) => {
     Category.findById(req.params.id).exec(function(err, category) {

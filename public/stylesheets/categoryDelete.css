@@ -75,3 +75,11 @@ button[type="submit"]{
     background-color: red;
     
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}

@@ -38,9 +38,21 @@
 
     <h1><%= item.name.toUpperCase() %></h1>
 
+    <% if(typeof errors != "undefined"){ %>
+      <% if (errors.length) { %>
+          <% errors.forEach((error) => { %>
+              <p class="alert">
+                 <%= error.msg %>
+              </p>
+          <% }) %>
+      <% } %>
+  <% } %>
+
     <p>Do you really want to delete this item?</p>
 
     <form action="" method="POST">
+        <label for="pass">Admin Password(Required for changes):</label>
+        <input type="text" name="pass" id="pass"/>
         <button type="submit">DELETE</button>
     </form>
 </body>

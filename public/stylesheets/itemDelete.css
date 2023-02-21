@@ -35,3 +35,15 @@ h1 {
     letter-spacing: 4px;
     font-size: calc(2em + 0.5vw);
 }
+
+.alert {
+    color: red;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
