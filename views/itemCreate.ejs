@@ -62,6 +62,8 @@
                     <% }) %>
                 <% } %>
             </select>
+            <label for="imageURL">Image URL(optional):</label>
+            <input type="url" name="imageURL" id="imageURL"/>
             <button type="submit">SUBMIT</button>
         </form>
     <%} else {%>
@@ -86,6 +88,8 @@
                     <% }) %>
                 <% } %>
             </select>
+            <label for="imageURL">Image URL(optional):</label>
+            <input type="url" name="imageURL" id="imageURL" value="<%= item.image %>"/>
             <button type="submit">SUBMIT</button>
         </form>
     <% } %>

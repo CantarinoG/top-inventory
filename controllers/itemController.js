@@ -56,8 +56,7 @@ exports.itemCreatePost = [
     .escape(),
     body("description", "Description must not be empty.")
     .trim()
-    .isLength({min: 1})
-    .escape(),
+    .isLength({min: 1}),
     body("price", "Price must be a number.")
     .isNumeric().escape(),
     body("price", "Price must not be empty.")
@@ -68,6 +67,7 @@ exports.itemCreatePost = [
     .isNumeric().escape(),
     body("category", "A category must be selected.")
     .notEmpty().escape(),
+    body("imageURL").trim(),
     (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({
@@ -75,7 +75,8 @@ exports.itemCreatePost = [
             description: req.body.description,
             category: req.body.category,
             price: req.body.price,
-            inStock: req.body.inStock
+            inStock: req.body.inStock,
+            image: req.body.imageURL
         });
         if (!errors.isEmpty()) {
             Category.find({}).sort({name: 1}).exec(
@@ -169,8 +170,7 @@ exports.itemUpdatePost = [
     .escape(),
     body("description", "Description must not be empty.")
     .trim()
-    .isLength({min: 1})
-    .escape(),
+    .isLength({min: 1}),
     body("price", "Price must be a number.")
     .isNumeric().escape(),
     body("price", "Price must not be empty.")
@@ -181,6 +181,7 @@ exports.itemUpdatePost = [
     .isNumeric().escape(),
     body("category", "A category must be selected.")
     .notEmpty().escape(),
+    body("imageURL").trim(),
     (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({
@@ -189,6 +190,7 @@ exports.itemUpdatePost = [
             category: req.body.category,
             price: req.body.price,
             inStock: req.body.inStock,
+            image: req.body.imageURL,
             _id: req.params.id
         });
         if (!errors.isEmpty()) {
