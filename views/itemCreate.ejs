@@ -65,7 +65,7 @@
             <label for="imageURL">Image URL(optional):</label>
             <input type="url" name="imageURL" id="imageURL"/>
             <label for="pass">Admin Password(Required for changes):</label>
-            <input type="text" name="pass" id="pass"/>
+            <input type="password" name="pass" id="pass"/>
             <button type="submit">SUBMIT</button>
         </form>
     <%} else {%>
@@ -93,7 +93,7 @@
             <label for="imageURL">Image URL(optional):</label>
             <input type="url" name="imageURL" id="imageURL" value="<%= item.image %>"/>
             <label for="pass">Admin Password(Required for changes):</label>
-            <input type="text" name="pass" id="pass"/>
+            <input type="password" name="pass" id="pass"/>
             <button type="submit">SUBMIT</button>
         </form>
     <% } %>

@@ -2,6 +2,7 @@ const Item = require("../models/item.js");
 const Category = require("../models/category.js");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+require('dotenv').config();
 
 exports.itemList = (req, res, next) => {
     Item.find({})
@@ -65,7 +66,7 @@ exports.itemCreatePost = [
     .notEmpty().escape(),
     body("imageURL").trim(),
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;
@@ -125,7 +126,7 @@ exports.itemDeleteGet = (req, res, next) => {
 
 exports.itemDeletePost = [
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;
@@ -199,7 +200,7 @@ exports.itemUpdatePost = [
     .notEmpty().escape(),
     body("imageURL").trim(),
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;

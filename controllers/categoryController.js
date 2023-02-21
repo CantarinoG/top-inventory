@@ -3,6 +3,7 @@ const Item = require("../models/item.js");
 const async = require("async");
 const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
+require('dotenv').config();
 
 exports.categoryList = (req, res, next) => {
     Category.find({})
@@ -54,7 +55,7 @@ exports.categoryCreatePost = [
     body("name", "Name is required.").trim().isLength({min: 1}).escape(),
     body("description", "Description is required.").trim().isLength({min: 1}).escape(),
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;
@@ -110,7 +111,7 @@ exports.categoryDeleteGet = (req, res, next) => {
 
 exports.categoryDeletePost = [
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;
@@ -178,7 +179,7 @@ exports.categoryUpdatePost = [
     body("name", "Name is required.").trim().isLength({min: 1}).escape(),
     body("description", "Description is required.").trim().isLength({min: 1}).escape(),
     body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
-        if ('123' !== req.body.pass) {
+        if (process.env.PASS !== req.body.pass) {
             throw new Error("Invalid password.");
         } else {
             return value;

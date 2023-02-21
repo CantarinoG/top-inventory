@@ -51,7 +51,7 @@
             <label for="description">Description:</label>
             <textarea name="description" id="description"></textarea>
             <label for="pass">Admin Password(Required for changes):</label>
-            <input type="text" name="pass" id="pass"/>
+            <input type="password" name="pass" id="pass"/>
             <button type="submit">SUBMIT</button>
         </form>
     <%} else {%>
@@ -61,7 +61,7 @@
             <label for="description">Description:</label>
             <textarea name="description" id="description"><%= category.description %></textarea>
             <label for="pass">Admin Password(Required for changes):</label>
-            <input type="text" name="pass" id="pass"/>
+            <input type="password" name="pass" id="pass"/>
             <button type="submit">SUBMIT</button>
         </form>
     <% } %>
