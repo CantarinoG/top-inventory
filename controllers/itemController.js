@@ -42,7 +42,8 @@ exports.itemCreateGet = (req, res, next) => {
                 return next(err);
             }
             res.render("itemCreate", {
-                listCategories: listCategories
+                listCategories: listCategories,
+                title: "Create Item"
             });
         }
     );
@@ -85,7 +86,8 @@ exports.itemCreatePost = [
                     res.render("itemCreate", {
                         listCategories: listCategories,
                         item: item,
-                        errors: errors.array()
+                        errors: errors.array(),
+                        title: "Create Item"
                     });
                 }
             );
@@ -154,7 +156,8 @@ exports.itemUpdateGet = (req, res, next) => {
         }
         res.render("itemCreate", {
             listCategories: results.categories,
-            item: results.item
+            item: results.item,
+            title: "Update Item"
         });
     });
 }
@@ -197,7 +200,8 @@ exports.itemUpdatePost = [
                     res.render("itemCreate", {
                         listCategories: listCategories,
                         item: item,
-                        errors: errors.array()
+                        errors: errors.array(),
+                        title: "Update Item"
                     });
                 }
             );
