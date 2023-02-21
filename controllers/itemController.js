@@ -61,13 +61,16 @@ exports.itemCreatePost = [
     .isNumeric().escape(),
     body("price", "Price must not be empty.")
     .notEmpty().escape(),
-    body("inStock", "In Stock must not be empty.")
-    .notEmpty().escape(),
-    body("inStock", "In Stock must be a number.")
-    .isNumeric().escape(),
     body("category", "A category must be selected.")
     .notEmpty().escape(),
     body("imageURL").trim(),
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
     (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({
@@ -175,13 +178,16 @@ exports.itemUpdatePost = [
     .isNumeric().escape(),
     body("price", "Price must not be empty.")
     .notEmpty().escape(),
-    body("inStock", "In Stock must not be empty.")
-    .notEmpty().escape(),
-    body("inStock", "In Stock must be a number.")
-    .isNumeric().escape(),
     body("category", "A category must be selected.")
     .notEmpty().escape(),
     body("imageURL").trim(),
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
     (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({

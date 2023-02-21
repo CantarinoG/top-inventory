@@ -53,6 +53,13 @@ exports.categoryCreateGet = (req, res, next) => {
 exports.categoryCreatePost = [
     body("name", "Name is required.").trim().isLength({min: 1}).escape(),
     body("description", "Description is required.").trim().isLength({min: 1}).escape(),
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
     (req, res, next) => {
         const errors = validationResult(req);
         const category = new Category({
@@ -151,6 +158,13 @@ exports.categoryUpdateGet = (req, res, next) => {
 exports.categoryUpdatePost = [
     body("name", "Name is required.").trim().isLength({min: 1}).escape(),
     body("description", "Description is required.").trim().isLength({min: 1}).escape(),
+    body("pass", "Invalid password.").custom( (value, {req, loc, path}) => {
+        if ('123' !== req.body.pass) {
+            throw new Error("Invalid password.");
+        } else {
+            return value;
+        }
+    }),
     (req, res, next) => {
         const errors = validationResult(req);
         const category = new Category({
