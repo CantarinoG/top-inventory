@@ -30,7 +30,7 @@
         </nav>
     </header>
 
-    <% if (typeof item.image == "undefined") { %>
+    <% if (typeof item.image == "undefined" || item.image == "") { %>
         <img src="/images/noPic.png" alt="Not Provided">
     <% } else { %>
         <img src="<%= item.image %>" alt="<%= item.name %>">
