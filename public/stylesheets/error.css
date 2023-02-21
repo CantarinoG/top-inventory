@@ -1,0 +1,21 @@
+body {
+    padding: calc(60px + 10%) 10% 10% 10%;
+    color: black;
+    font-family: var(--vato);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.stack {
+    text-align: left;
+    width: 100%;
+    word-wrap:break-word;
+}
+
+h1, h2 {
+    letter-spacing: 4px;
+}
