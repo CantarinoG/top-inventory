@@ -1,0 +1,77 @@
+body {
+    padding: calc(60px + 10%) 10% 10% 10%;
+    color: black;
+    font-family: var(--vato);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 200px;
+}
+
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    font-size: 1em;
+}
+
+.see, button {
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: var(--vato);
+    margin: 0 4px;
+    opacity: .8;
+    padding: 12px 24px;
+}
+
+button:hover, .see:hover {
+    opacity: 1;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+    color: white;
+}
+
+h1 {
+    letter-spacing: 4px;
+    font-size: calc(2em + 0.5vw);
+}
+
+h2 {
+    letter-spacing: 4px;
+    font-size: calc(1.5em + 0.5vw);
+}
+
+.alert {
+    color: red;
+}
+
+button[type="submit"]{
+    background-color: red;
+    
+}
