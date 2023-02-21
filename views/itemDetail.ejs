@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1><%= item.name %></h1>
-    <%= item.name %> <br> <%= item.description %> <br> Price $<%= item.price.toFixed(2) %> 
-    <% if(item.inStock){ %>
-        | In Stock: <%= item.inStock%>
-    <% } %>
-    <br> Category: <%= item.category.name %>
+  <head>
+    <title><%= item.name %> | Flow Shop</title>
 
-    <p>
-        <a href="<%= item.url%>/update">Update</a>
-        <a href="<%= item.url%>/delete">Delete</a>
-    </p>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta
+      name="description"
+      content=" An inventory management app for a fictional store called FlowShop."
+    />
+
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel='stylesheet' href='/stylesheets/itemDetail.css' />
+
+  </head>
+
+<body>
+
+    <header>
+        <nav class="logo">
+          <a href="../">FLOW SHOP</a>
+        </nav>
+        <nav>
+                <a href="../categories">CATEGORIES</a>
+                <a href="../items">ITEMS</a>
+        </nav>
+    </header>
+
+    <% if (typeof item.image == "undefined") { %>
+        <img src="/images/noPic.png" alt="Not Provided">
+    <% } else { %>
+        <img src="<%= item.image %>" alt="<%= item.name %>">
+    <% } %>
+
+    <div class="info">
+
+        <h1><%= item.name.toUpperCase() %></h1>
+        <p><%= item.description %></p>
+        <span class="price">PRICE $<%= item.price.toFixed(2) %> </span>
+        <% if(item.inStock){ %>
+            <span class="inStock">IN STOCK: <%= item.inStock%></span>
+        <% } %>
+        <span class="category">CATEGORY: <a class="under" href="<%= item.category.url %>"><%= item.category.name %></a></span>
+
+        <div class="actions">
+            <a class="btn" href="<%= item.url%>/update">UPDATE</a>
+            <a class="btn" href="<%= item.url%>/delete">DELETE</a>
+        </div>
+
+    </div>
 
 </body>
 </html>

@@ -41,11 +41,11 @@
             <% if (listItems.length) { %>
                 <% listItems.forEach((item) => { %>
                     <div class="card">
-                        <% if (typeof item.image == "undefined") {%>
-                            <img class="card-img-top" src="/images/noPic.png" alt="Card image">
-                        <%} else {%>
-                            <img class="card-img-top" src="<%= item.image %>" alt="Card image">
-                        <%}%>
+                        <% if (typeof item.image == "undefined") { %>
+                            <img class="card-img-top" src="/images/noPic.png" alt="Not Provided">
+                        <% } else { %>
+                            <img class="card-img-top" src="<%= item.image %>" alt="<%= item.name %>">
+                        <% } %>
 
                         <div class="card-body">
                         <h4 class="card-title" title="<%= item.name %>"><%= item.name %></h4>
