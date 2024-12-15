@@ -1,27 +1,27 @@
-<details open>
-<summary>English</summary>
-<br>
+# Store Management App
 
-## Inventory
+### Overview
 
-The inventory app to a fictional store.
-The user can create, read, update and delete information about categories and items.
-All operations except for read need an admin password, which in the deploy is "admin123".
+This is an store management application designed for a fictional store. The app allows users to manage categories and items within the store, supporting full CRUD (Create, Read, Update, Delete) operations. While anyone can view the inventory, administrative actions (create, update, and delete) require authentication with an admin password.
 
-Deploy link: https://top-inventory.cantarinog.repl.co
+The application is built using **Node.js**, **Express**, and **MongoDB**, providing a robust and scalable backend to handle inventory data.
 
-<br>
-</details>
+### Features
 
-<details>
-<summary>Português</summary>
-<br>
+- **Item Management**: 
+  - Create new items with relevant details such as name, category, description, price, and quantity.
+  - Update item information to reflect changes in inventory.
+  - Delete items no longer available in the store.
+  - View details of all items, including their category and current stock.
 
-## Inventário
+- **Category Management**:
+  - Add new categories to organize items effectively.
+  - Update category names or details.
+  - Delete unused categories.
+  - View all available categories.
 
-Uma aplicação de inventário para uma loja fictícia. O usuário pode criar, ler, atualizar e deletar informação sobre categorias e itens. Toda as operações exceto leitura precisam de uma senha administador, que no caso desse deploy é "admin123".
+- **Admin Authentication**:
+  - Administrative actions require an admin password, ensuring data security.
 
-Deploy: https://top-inventory.cantarinog.repl.co
-
-<br>
-</details>
+- **Responsive Design**:
+  - The app interface is user-friendly and works seamlessly across devices.
